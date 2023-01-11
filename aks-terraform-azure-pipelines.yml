@@ -64,7 +64,7 @@ stages:
                 displayName: terraform init
                 inputs:
                   command: 'init'
-                  workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
+                  workingDirectory: $(System.DefaultWorkingDirectory)/terraform-files'
                   #workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
                   backendType: 'azurerm'
                   backendServiceArm: 'aks-terraform-svc-con'
@@ -79,14 +79,14 @@ stages:
                 inputs:
                   command: 'plan'
                   environmentServiceName: 'aks-terraform-svc-con'
-                  workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
+                  workingDirectory: $(System.DefaultWorkingDirectory)/terraform-files'
                   commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(dev-env) -out $(Pipeline.Workspace)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
                   allowTelemetryCollection: false
               - task: TerraformCLI@0
                 displayName: terraform apply
                 inputs:
                   command: 'apply'
-                  workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
+                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
                   environmentServiceName: 'aks-terraform-svc-con'
                   commandOptions: '$(Pipeline.Workspace)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
                   allowTelemetryCollection: false
