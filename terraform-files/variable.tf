@@ -43,13 +43,13 @@ variable "location" {
 variable "environment" {
   type        = string
   description = "Environment name"
-  default     = "dev"
+  # default     = "dev"
 
 }
 
 variable "ssh_public_key" {
   description = "SSH Public key for AKS Cluster"
-  default     = "./ssh/aks.pub"
+  # default     = "./ssh/aks.pub"
 
 }
 
