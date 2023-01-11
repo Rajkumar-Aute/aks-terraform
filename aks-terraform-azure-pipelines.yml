@@ -5,6 +5,11 @@ trigger: none
 pool:
   vmImage: ubuntu-latest
 
+variables:
+- name: dev-env
+  value: dev
+- name: qa-env
+  value: qa
 stages:
   - stage: TerraformValidate
     jobs:
@@ -39,3 +44,32 @@ stages:
               command: validate
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
               allowTelemetryCollection: false
+
+
+  - stage: DeployAKSCluster
+    jobs:
+      - deployment: DeployAKSCluster
+        displayName: DeployAKSCluster
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: $(dev-env)
+        strategy:
+         runOnce:
+           deploy:
+             steps:          
+              - task: DownloadSecureFile@1
+                inputs:
+                  secureFile: 'aks.pub'
+              - task: TerraformCLI@0
+                displayName: terraform init
+                inputs:
+                  command: 'init'
+                  workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
+                  backendType: 'azurerm'
+                  backendServiceArm: 'aks-terraform-svc-con'
+                  backendAzureRmSubscriptionId: 'bedd05d0-ed0c-45f5-9fe1-fc38a22ead10'
+                  backendAzureRmResourceGroupName: 'tfstateraj'
+                  backendAzureRmStorageAccountName: 'tfstateraj'
+                  backendAzureRmContainerName: 'tfstateraj'
+                  backendAzureRmKey: 'aks-$(dev-env).tfstate'
+                  allowTelemetryCollection: false
