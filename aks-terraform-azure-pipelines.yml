@@ -57,6 +57,8 @@ stages:
            deploy:
              steps:          
               - task: DownloadSecureFile@1
+                displayName: download ssh key
+                name: sshkey
                 inputs:
                   secureFile: 'aks.pub'
               - task: TerraformCLI@0
