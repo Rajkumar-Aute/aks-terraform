@@ -20,7 +20,6 @@ stages:
             inputs:
               TargetPath: '$(System.DefaultWorkingDirectory)/terraform-files'
               ArtifactName: 'terraform-files-out'
-              publishLocation: 'pipeline'
           - task: TerraformInstaller@0
             displayName: Terraform install
             inputs:
@@ -64,7 +63,7 @@ stages:
                 displayName: Terraform init
                 inputs:
                   command: 'init'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
+                  workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
                   backendType: 'azurerm'
                   backendServiceArm: 'aks-terraform-svc-con'
                   backendAzureRmSubscriptionId: 'bedd05d0-ed0c-45f5-9fe1-fc38a22ead10'
