@@ -20,7 +20,7 @@ stages:
             inputs:
               TargetPath: '$(System.DefaultWorkingDirectory)/terraform-files'
               ArtifactName: 'terraform-files-out'
-              publishLocation: 'pipeline' 
+              publishLocation: 'pipeline'
           - task: TerraformInstaller@0
             displayName: Terraform install
             inputs:
