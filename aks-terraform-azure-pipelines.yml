@@ -62,6 +62,9 @@ stages:
                 name: sshkey
                 inputs:
                   secureFile: 'aks.pub'
+              
+
+              
               - task: TerraformCLI@0
                 displayName: Terraform init
                 inputs:
@@ -69,7 +72,7 @@ stages:
                   workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
                   backendType: 'azurerm'
                   backendServiceArm: 'aks-terraform-svc-con'
-                  backendAzureRmSubscriptionId: 'bedd05d0-ed0c-45f5-9fe1-fc38a22ead10'
+                  #backendAzureRmSubscriptionId: 'bedd05d0-ed0c-45f5-9fe1-fc38a22ead10'
                   backendAzureRmResourceGroupName: 'tfstateraj'
                   backendAzureRmStorageAccountName: 'tfstateraj'
                   backendAzureRmContainerName: 'tfstateraj'
