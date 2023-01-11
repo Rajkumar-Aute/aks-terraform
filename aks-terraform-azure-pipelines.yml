@@ -29,7 +29,7 @@ stages:
             displayName: Terraform init
             inputs:
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
+              workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
               backendType: 'azurerm'
               backendServiceArm: 'aks-terraform-svc-con'
               backendAzureRmSubscriptionId: 'bedd05d0-ed0c-45f5-9fe1-fc38a22ead10'
@@ -42,20 +42,17 @@ stages:
             displayName: Terraform Validate
             inputs:
               command: validate
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
+              workingDirectory: '$(Pipeline.Workspace)/terraform-files-out'
               allowTelemetryCollection: false
 
-
+/*
   - stage: DeployAKSCluster
     jobs:
       - job: DeployAKSCluster
         displayName: DeployAKSCluster
         pool:
           vmImage: 'ubuntu-latest'
-        #environment: $(dev-env)
-        #strategy:
-        # runOnce:
-           #deploy:
+
         steps:          
         - task: DownloadSecureFile@1
           displayName: download ssh key
@@ -94,3 +91,5 @@ stages:
             environmentServiceName: 'aks-terraform-svc-con'
             commandOptions: '$(Pipeline.Workspace)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
             allowTelemetryCollection: false
+
+*/
