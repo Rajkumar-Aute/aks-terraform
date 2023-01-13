@@ -36,7 +36,7 @@ stages:
             displayName: Terraform init
             inputs:
               command: 'init'
-              workingDirectory: '$(Pipeline. Workspace)'' 
+              workingDirectory: '$(Pipeline. Workspace)'
               #'$(Pipeline.Workspace)/terraform-files-out'
               backendType: 'azurerm'
               backendServiceArm: 'aks-terraform-svc-con'
