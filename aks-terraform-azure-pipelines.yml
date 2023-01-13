@@ -76,11 +76,11 @@ stages:
                   workingDirectory: '$(Agent.BuildDirectory)/terraform-files-out'
                   commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(dev-env) -out $(Agent.BuildDirectory)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
                   allowTelemetryCollection: false
-              - task: TerraformCLI@0
-                displayName: terraform apply
-                inputs:
-                  command: 'apply'
-                  workingDirectory: '$(Agent.BuildDirectory)/terraform-files-out'
-                  environmentServiceName: 'aks-terraform-svc-con'
-                  commandOptions: '$(Agent.BuildDirectory)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
-                  allowTelemetryCollection: false
+              # - task: TerraformCLI@0
+              #   displayName: terraform apply
+              #   inputs:
+              #     command: 'apply'
+              #     workingDirectory: '$(Agent.BuildDirectory)/terraform-files-out'
+              #     environmentServiceName: 'aks-terraform-svc-con'
+              #     commandOptions: '$(Agent.BuildDirectory)/terraform-files-out/$(dev-env)-$(Build.BuildId).out'
+              #     allowTelemetryCollection: false
