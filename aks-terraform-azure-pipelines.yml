@@ -76,7 +76,7 @@ stages:
                 displayName: Terraform init
                 inputs:
                   command: 'init'
-                  workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-files'
+                  workingDirectory: '$(Agent.BuildDirectory)/terraform-files-out'
                   backendType: 'azurerm'
                   backendServiceArm: 'aks-terraform-svc-con'
                   backendAzureRmSubscriptionId: $(SUB-ID)
