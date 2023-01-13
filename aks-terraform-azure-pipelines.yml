@@ -45,7 +45,7 @@ stages:
         displayName: DeployAKSCluster
         pool:
           vmImage: 'ubuntu-latest'
-        environment: $(dev-env)
+        environment: $(dev)
         strategy:
          runOnce:
            deploy:
