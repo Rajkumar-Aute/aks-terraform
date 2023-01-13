@@ -12,11 +12,22 @@ stages:
       - job: TerraformValidateJob
         continueOnError: false
         steps:
-          - task: PublishBuildArtifacts@1
+          - task: CopyPublishBuildArtifacts@1
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-files'
+              CopyRoot: '$(System.DefaultWorkingDirectory)/terraform-files'
+              Contents: '*'
               ArtifactName: 'terraform-files-out'
-              publishLocation: 'pipeline'
+              ArtifactType: 'Container'
+          # - task: PublishBuildArtifacts@1
+          #     inputs:
+          #       TargetPath: '$(System.DefaultWorkingDirectory)/terraform-files'
+          #       ArtifactName: 'terraform-files-out'
+          #       publishLocation: 'pipeline'
+          # - task: PublishBuildArtifacts@1
+          #   inputs:
+          #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-files'
+          #     ArtifactName: 'terraform-files-out'
+          #     publishLocation: 'pipeline'
           - task: TerraformInstaller@0
             displayName: Terraform install
             inputs:
