@@ -16,7 +16,7 @@ stages:
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-files'
               ArtifactName: 'terraform-files-out'
-              publishLocation: 'Container'
+              publishLocation: 'pipeline'
           - task: TerraformInstaller@0
             displayName: Terraform install
             inputs:
